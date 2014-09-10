@@ -1,0 +1,2 @@
+DEBUG = TRUE
+WTF_CSRF_ENABLED = False
