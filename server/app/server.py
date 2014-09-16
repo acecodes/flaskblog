@@ -10,7 +10,7 @@ from flask.ext.httpauth import HTTPBasicAuth
 basedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../')
  
 app = Flask(__name__)
-app.config.from_object('app.config')
+app.config.from_object('config')
  
 # flask-sqlalchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
@@ -32,4 +32,7 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
     return response
  
-import app.views
+import views
+
+if __name__ == '__main__':
+	app.run(debug=True, port=8001)

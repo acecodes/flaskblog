@@ -1,11 +1,18 @@
 from flask import g
 from flask.ext import restful
  
-from app.server import api, db, flask_bcrypt, auth
-from app.models import User, Post
-from app.forms import UserCreateForm, SessionCreateForm, PostCreateForm
-from app.serializer import UserSerializer, PostSerializer
- 
+try:
+    from app.server import api, db, flask_bcrypt, auth
+    from app.models import User, Post
+    from app.forms import UserCreateForm, SessionCreateForm, PostCreateForm
+    from app.serializer import UserSerializer, PostSerializer
+    
+except ImportError:
+    from server import api, db, flask_bcrypt, auth
+    from models import User, Post
+    from forms import UserCreateForm, SessionCreateForm, PostCreateForm
+    from serializer import UserSerializer, PostSerializer
+
 @auth.verify_password
 def verify_password(email, password):
     user = User.query.filter_by(email=email).first()
